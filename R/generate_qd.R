@@ -78,6 +78,6 @@ generate_qd <- function(type) {
     glue("You will be doing {swing} swings and {pushup} push-ups.")
   }
   
-  workout <- paste(advice, vr, details, types, sep = "\n")
-  
+  workout <- c(advice, vr, details, types)
+  return(workout)
 }

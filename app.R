@@ -24,11 +24,13 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            selectInput("type",
+            radioButtons("type",
                         "Workout type",
                         choices = c("snatch", "swing"),
-                        selected = "swing")
-        ),
+                        selected = "swing"),
+            actionButton("button",
+                         "Generate")
+                ),
 
         # Show a plot of the generated distribution
         mainPanel(
@@ -40,9 +42,11 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$workout <- renderPrint({
-       generate_qd(type = input$type)
-    })
+    output$workout <- renderText({
+        input$button
+        generate_qd(type = input$type)
+    },
+    sep = "\n\n")
 }
 
 # Run the application 
